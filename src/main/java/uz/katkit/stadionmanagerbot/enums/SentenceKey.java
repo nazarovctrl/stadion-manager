@@ -1,0 +1,20 @@
+package uz.katkit.stadionmanagerbot.enums;
+
+
+public enum SentenceKey {
+    START, RESTART, HELP, LANGUAGE, SUBSCRIBE, CHECK, LANGUAGE_CHANGED, HOME,
+
+
+    //Sign Up - Profile(Cabinet)
+    REQUEST_CONTACT, REQUEST_BIO, REQUEST_NAME, REQUEST_PROFESSION,
+    SIGN_UP_CONFIRM, SIGN_UP_CANCEL,
+    //Information shablon
+    NAME, PHONE_NUMBER, INFORMATION,
+
+    NUMBER_CHANGED, //Profile (Cabinet)
+    NAME_CHANGED, BIO_CHANGED, PROFESSION_CHANGED, PROFILE, PROFILE_EDIT,
+
+    START_ADMIN, STATISTIC ,POST_REQUEST
+
+
+}
