@@ -17,7 +17,6 @@ import static uz.katkit.stadionmanagerbot.enums.ButtonKey.STATISTICS;
 public class AdminTextController {
     private final AdminTextService adminTextService;
     private final SentenceService sentenceService;
-    private final ProfileService profileService;
 
 
     public void handle(String text, Long chatId) {
