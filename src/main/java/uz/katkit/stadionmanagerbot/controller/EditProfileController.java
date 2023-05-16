@@ -43,12 +43,10 @@ public class EditProfileController {
         switch (step) {
             case PROFILE_EDIT_NAME -> {
                 editProfileService.changeName(chatId, text);
-                return;
             }
 
             case PROFILE_EDIT_PHONE -> {
                 editProfileService.changePhoneNumber(chatId, text);
-                return;
             }
 
         }
