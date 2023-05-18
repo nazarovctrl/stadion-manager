@@ -145,7 +145,7 @@ public class ButtonService {
                                 ButtonUtil.button(sentenceService.getButtonText(ButtonKey.CHANGE_NAME, languageCode)),
                                 ButtonUtil.button(sentenceService.getButtonText(ButtonKey.CHANGE_PHONE, languageCode))
                         ),
-                        getBackAndHomeRow(languageCode)
+                        getHomeRow(languageCode)
                 )
         );
     }

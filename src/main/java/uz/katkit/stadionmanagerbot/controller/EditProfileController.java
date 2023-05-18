@@ -19,39 +19,29 @@ public class EditProfileController {
     private final EditProfileService editProfileService;
 
 
-
     public void handle(Long chatId, String text) {
         ButtonKey buttonKey = sentenceService.getButtonKey(text);
 
 
         if (buttonKey != null) {
             switch (buttonKey) {
-                case CHANGE_NAME -> {
-                    editProfileService.requestName(chatId);
-                    return;
-                }
-                case CHANGE_PHONE -> {
-                    editProfileService.requestPhone(chatId);
-                    return;
-                }
+                case CHANGE_NAME -> editProfileService.requestName(chatId);
+                case CHANGE_PHONE -> editProfileService.requestPhone(chatId);
+                case BACK -> editProfileService.toEditCabinet(chatId);
             }
+
             return;
         }
 
         Step step = profileService.getStep(chatId);
 
         switch (step) {
-            case PROFILE_EDIT_NAME -> {
-                editProfileService.changeName(chatId, text);
-            }
-
-            case PROFILE_EDIT_PHONE -> {
-                editProfileService.changePhoneNumber(chatId, text);
-            }
-
+            case PROFILE_EDIT_NAME -> editProfileService.changeName(chatId, text);
+            case PROFILE_EDIT_PHONE -> editProfileService.changePhoneNumber(chatId, text);
         }
 
     }
+
 
     public void changePhoneNumber(Message message) {
         Contact contact = message.getContact();

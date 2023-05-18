@@ -20,9 +20,9 @@ public class EditProfileService {
     private final SendingService sendingService;
 
 
-
-
     public void toEditCabinet(Long chatId) {
+        sendInformation(chatId);
+
         profileService.changeStep(chatId, Step.PROFILE_EDIT);
         String languageCode = profileService.getLanguageCode(chatId);
 
@@ -69,6 +69,8 @@ public class EditProfileService {
 
         sendingService.sendMessage(sendMessage);
 
+        sendInformation(chatId);
+
     }
 
     public void changeName(Long chatId, String text) {
@@ -82,11 +84,11 @@ public class EditProfileService {
         sendMessage.setText(sentenceService.getSentence(SentenceKey.NAME_CHANGED, languageCode));
         sendingService.sendMessage(sendMessage);
 
+        sendInformation(chatId);
     }
 
 
     public void sendInformation(Long chatId) {
-
         String informationByUserId = profileService.getInformationByUserId(chatId);
         SendMessage sendMessage = new SendMessage();
         sendMessage.setParseMode(ParseMode.MARKDOWN);
@@ -95,7 +97,5 @@ public class EditProfileService {
         sendingService.sendMessage(sendMessage);
     }
 
-    public void toMenu(Long chatId) {
 
-    }
 }

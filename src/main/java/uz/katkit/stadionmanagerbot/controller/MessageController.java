@@ -38,6 +38,7 @@ public class MessageController {
             if (step.equals(Step.PROFILE_EDIT_PHONE)) {
                 editProfileController.changePhoneNumber(message);
             }
+            return;
         }
 
         if (message.hasText()) {

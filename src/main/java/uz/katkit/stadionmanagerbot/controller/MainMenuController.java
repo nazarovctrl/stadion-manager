@@ -25,6 +25,7 @@ public class MainMenuController {
                 cabinetService.toEditCabinet(chatId);
             }
 
+
         }
     }
 }

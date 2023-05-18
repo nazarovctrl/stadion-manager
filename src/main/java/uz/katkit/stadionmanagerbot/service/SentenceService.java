@@ -69,9 +69,9 @@ public class SentenceService {
 
     private void initializeSentence() {
         SentenceDTO start = new SentenceDTO(
-                "Salom *%s* ! \nSiz bu bot orqali o'zinzgizga jamoa yig'ishingiz mumkin",
-                "Привет *%s* ! \nВы можете создать свою собственную команду с этим ботом",
-                "Hello *%s* ! \nYou can build your own team with this bot"
+                "Salom *%s* ! \nSiz bu bot orqali stadion band qilishingiz mumkin",
+                "Привет *%s* ! \nВы можете забронировать стадион через этого бота",
+                "Hello *%s* ! \nYou can book a stadium through this bot"
         );
         sentenceMap.put(SentenceKey.START, start);
 
@@ -152,8 +152,8 @@ public class SentenceService {
 
         SentenceDTO name = new SentenceDTO(
                 "Ism va Familya",
-                "First name and last name",
-                "Имя и Фамилия"
+                "Имя и Фамилия",
+                "First name and last name"
         );
         sentenceMap.put(SentenceKey.NAME, name);
 
