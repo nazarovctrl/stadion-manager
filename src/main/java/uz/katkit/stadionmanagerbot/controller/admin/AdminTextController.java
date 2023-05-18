@@ -31,20 +31,12 @@ public class AdminTextController {
 
         if (buttonKey != null) {
             switch (buttonKey) {
-
-                case STATISTICS -> {
-                    adminTextService.sendStatistic(chatId);
-                    return;
-                }
-                case POST_CREATE -> {
-                    adminTextService.requestPost(chatId);
-                    return;
-                }
-
+                case STATISTICS -> adminTextService.sendStatistic(chatId);
+                case POST_CREATE -> adminTextService.requestPost(chatId);
             }
+            return;
 
         }
-
 
 
     }

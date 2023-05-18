@@ -80,7 +80,7 @@ public class TextService {
 
 
         InputFile inputFile = new InputFile();
-        inputFile.setMedia("AgACAgIAAxkBAAIC_WQAATaX5NWNxD9nsePLI03rMS6yaAACRsIxG392-ErCzmiK73IKuQEAAwIAA3gAAy4E");
+        inputFile.setMedia("AgACAgIAAxkBAAN0ZGX-6KcwY1mcVJeXghKOSAQ70OsAArXGMRvqMjFLoz_jGKXPMEkBAAMCAAN5AAMvBA");
         sendPhoto.setPhoto(inputFile);
 
         String languageCode = profileService.getLanguageCode(chatId);
