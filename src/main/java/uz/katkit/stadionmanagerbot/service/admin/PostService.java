@@ -1,6 +1,5 @@
 package uz.katkit.stadionmanagerbot.service.admin;
 
-
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ForwardMessage;
 import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;
@@ -12,7 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.polls.PollOption;
 import uz.katkit.stadionmanagerbot.bot.SendingService;
 import uz.katkit.stadionmanagerbot.entity.ProfileEntity;
 import uz.katkit.stadionmanagerbot.service.ProfileService;
-
 import java.util.ArrayList;
 import java.util.List;
 

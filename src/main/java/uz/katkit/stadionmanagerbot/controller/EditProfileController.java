@@ -1,6 +1,5 @@
 package uz.katkit.stadionmanagerbot.controller;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Contact;

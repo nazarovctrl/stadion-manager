@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.katkit.stadionmanagerbot.enums.ProfileRole;
 import uz.katkit.stadionmanagerbot.enums.Step;
-
 import java.time.LocalDateTime;
 
 @Getter

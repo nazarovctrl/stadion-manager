@@ -1,6 +1,5 @@
 package uz.katkit.stadionmanagerbot.enums;
 
-
 public enum SentenceKey {
     START, RESTART, HELP, LANGUAGE, SUBSCRIBE, CHECK, LANGUAGE_CHANGED, HOME,
 

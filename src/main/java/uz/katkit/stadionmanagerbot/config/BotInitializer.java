@@ -9,7 +9,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import uz.katkit.stadionmanagerbot.bot.TelegramBot;
 
-
 @Slf4j
 @Component
 public class BotInitializer {

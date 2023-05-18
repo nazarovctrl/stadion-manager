@@ -1,6 +1,5 @@
 package uz.katkit.stadionmanagerbot.service;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;

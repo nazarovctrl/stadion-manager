@@ -1,16 +1,10 @@
 package uz.katkit.stadionmanagerbot.controller.admin;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import uz.katkit.stadionmanagerbot.enums.ButtonKey;
-import uz.katkit.stadionmanagerbot.enums.Step;
-import uz.katkit.stadionmanagerbot.service.ProfileService;
 import uz.katkit.stadionmanagerbot.service.SentenceService;
 import uz.katkit.stadionmanagerbot.service.admin.AdminTextService;
-
-import static uz.katkit.stadionmanagerbot.enums.ButtonKey.POST_CREATE;
-import static uz.katkit.stadionmanagerbot.enums.ButtonKey.STATISTICS;
 
 @Component
 @RequiredArgsConstructor

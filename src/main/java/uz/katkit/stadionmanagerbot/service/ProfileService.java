@@ -1,6 +1,5 @@
 package uz.katkit.stadionmanagerbot.service;
 
-
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
@@ -11,7 +10,6 @@ import uz.katkit.stadionmanagerbot.enums.ProfileRole;
 import uz.katkit.stadionmanagerbot.enums.SentenceKey;
 import uz.katkit.stadionmanagerbot.enums.Step;
 import uz.katkit.stadionmanagerbot.repository.ProfileRepository;
-
 import java.util.List;
 
 @Service

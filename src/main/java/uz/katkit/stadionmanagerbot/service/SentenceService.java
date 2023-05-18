@@ -1,13 +1,11 @@
 package uz.katkit.stadionmanagerbot.service;
 
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import uz.katkit.stadionmanagerbot.dto.SentenceDTO;
 import uz.katkit.stadionmanagerbot.enums.ButtonKey;
 import uz.katkit.stadionmanagerbot.enums.SentenceKey;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
