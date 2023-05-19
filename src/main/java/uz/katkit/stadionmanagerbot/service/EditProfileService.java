@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import uz.katkit.stadionmanagerbot.bot.SendingService;
 import uz.katkit.stadionmanagerbot.enums.SentenceKey;
 import uz.katkit.stadionmanagerbot.enums.Step;
@@ -15,7 +16,6 @@ public class EditProfileService {
     private final ProfileService profileService;
     private final ButtonService buttonService;
     private final SentenceService sentenceService;
-
     private final SendingService sendingService;
 
 
@@ -34,8 +34,8 @@ public class EditProfileService {
 
     }
 
-    public void requestName(Long chatId) {
-        profileService.changeStep(chatId, Step.PROFILE_EDIT_NAME);
+    public void requestName(Long chatId, Step step) {
+        profileService.changeStep(chatId, step);
 
         String languageCode = profileService.getLanguageCode(chatId);
         SendMessage sendMessage = new SendMessage();
@@ -43,6 +43,7 @@ public class EditProfileService {
         sendMessage.setText(sentenceService.getSentence(SentenceKey.REQUEST_NAME, languageCode));
         sendingService.sendMessage(sendMessage);
     }
+
 
     public void requestPhone(Long chatId) {
         profileService.changeStep(chatId, Step.PROFILE_EDIT_PHONE);
@@ -67,13 +68,12 @@ public class EditProfileService {
         sendMessage.setReplyMarkup(buttonService.getEditProfileMarkup(languageCode));
 
         sendingService.sendMessage(sendMessage);
-
         sendInformation(chatId);
 
     }
 
-    public void changeName(Long chatId, String text) {
-        profileService.changeStep(chatId, Step.PROFILE_EDIT);
+    public void changeName(Long chatId, String text, Step step, boolean isChange) {
+        profileService.changeStep(chatId, step);
         profileService.changeName(chatId, text);
 
         String languageCode = profileService.getLanguageCode(chatId);
@@ -82,8 +82,11 @@ public class EditProfileService {
         sendMessage.setChatId(chatId);
         sendMessage.setText(sentenceService.getSentence(SentenceKey.NAME_CHANGED, languageCode));
         sendingService.sendMessage(sendMessage);
-
-        sendInformation(chatId);
+        if (isChange) {
+            requestPhone(chatId);
+        } else {
+            sendInformation(chatId);
+        }
     }
 
 

@@ -24,7 +24,7 @@ public class EditProfileController {
 
         if (buttonKey != null) {
             switch (buttonKey) {
-                case CHANGE_NAME -> editProfileService.requestName(chatId);
+                case CHANGE_NAME -> editProfileService.requestName(chatId, Step.PROFILE_EDIT_NAME);
                 case CHANGE_PHONE -> editProfileService.requestPhone(chatId);
                 case BACK -> editProfileService.toEditCabinet(chatId);
             }
@@ -35,7 +35,7 @@ public class EditProfileController {
         Step step = profileService.getStep(chatId);
 
         switch (step) {
-            case PROFILE_EDIT_NAME -> editProfileService.changeName(chatId, text);
+            case PROFILE_EDIT_NAME -> editProfileService.changeName(chatId, text, Step.PROFILE_EDIT, false);
             case PROFILE_EDIT_PHONE -> editProfileService.changePhoneNumber(chatId, text);
         }
 

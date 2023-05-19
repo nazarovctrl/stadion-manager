@@ -19,6 +19,7 @@ public class TextController {
     private final SentenceService sentenceService;
     private final MainMenuController mainMenuController;
     private final EditProfileController editProfileController;
+    private final ProfileController profileController;
 
 
     public void handle(Message message) {
@@ -47,6 +48,10 @@ public class TextController {
 
         if (step.name().startsWith(Step.PROFILE_EDIT.name())) {
             editProfileController.handle(message.getChatId(), text);
+            return;
+        }
+        if (step.name().startsWith(Step.PROFILE_ENTER.name())) {
+            profileController.handle(message.getChatId(), text);
             return;
         }
 

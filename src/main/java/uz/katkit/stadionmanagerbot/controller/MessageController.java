@@ -6,6 +6,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import uz.katkit.stadionmanagerbot.controller.admin.AdminMessageController;
 import uz.katkit.stadionmanagerbot.enums.ProfileRole;
 import uz.katkit.stadionmanagerbot.enums.Step;
+import uz.katkit.stadionmanagerbot.service.EditProfileService;
 import uz.katkit.stadionmanagerbot.service.ProfileService;
 
 @Component
@@ -15,9 +16,14 @@ public class MessageController {
     private final AdminMessageController adminMessageController;
     private final TextController textController;
     private final EditProfileController editProfileController;
+    private final EditProfileService editProfileService;
 
     public void handle(Message message) {
-        profileService.addUser(message.getFrom());
+
+        if (profileService.addUser(message.getFrom())) {
+            editProfileService.requestName(message.getChatId(), Step.PROFILE_ENTER_NAME);
+            return;
+        }
 
         if (ProfileRole.ADMIN.equals(profileService.getByUserId(message.getChatId()).getRole())) {
             adminMessageController.handle(message);

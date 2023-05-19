@@ -10,6 +10,7 @@ import uz.katkit.stadionmanagerbot.enums.ProfileRole;
 import uz.katkit.stadionmanagerbot.enums.SentenceKey;
 import uz.katkit.stadionmanagerbot.enums.Step;
 import uz.katkit.stadionmanagerbot.repository.ProfileRepository;
+
 import java.util.List;
 
 @Service
@@ -27,9 +28,9 @@ public class ProfileService {
     }
 
 
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         if (profileRepository.existsByUserId(user.getId())) {
-            return;
+            return false;
         }
         ProfileEntity profileEntity = new ProfileEntity();
         profileEntity.setUserId(user.getId());
@@ -42,6 +43,7 @@ public class ProfileService {
         }
 
         profileRepository.save(profileEntity);
+        return true;
     }
 
     public String getLanguageCode(Long userId) {
