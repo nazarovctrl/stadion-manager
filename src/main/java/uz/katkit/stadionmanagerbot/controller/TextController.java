@@ -18,7 +18,7 @@ public class TextController {
     private final ProfileService profileService;
     private final SentenceService sentenceService;
     private final MainMenuController mainMenuController;
-    private final EditProfileController editProfileController;
+    private final ProfileEditController profileEditController;
     private final ProfileController profileController;
 
 
@@ -47,7 +47,7 @@ public class TextController {
 
 
         if (step.name().startsWith(Step.PROFILE_EDIT.name())) {
-            editProfileController.handle(message.getChatId(), text);
+            profileEditController.handle(message.getChatId(), text);
             return;
         }
         if (step.name().startsWith(Step.PROFILE_ENTER.name())) {

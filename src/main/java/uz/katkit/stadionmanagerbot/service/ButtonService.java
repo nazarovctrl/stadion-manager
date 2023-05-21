@@ -109,6 +109,19 @@ public class ButtonService {
         return row;
     }
 
+    public ReplyKeyboardMarkup getEnterContactButton(String languageCode) {
+        KeyboardButton contactButton = new KeyboardButton(sentenceService.getButtonText(ButtonKey.CONTACT, languageCode));
+        contactButton.setRequestContact(true);
+        KeyboardRow row = new KeyboardRow();
+        row.add(contactButton);
+
+        List<KeyboardRow> keyboard = new ArrayList<>();
+        keyboard.add(row);
+        ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
+        markup.setKeyboard(keyboard);
+        markup.setResizeKeyboard(true);
+        return markup;
+    }
     public ReplyKeyboardMarkup getRequestContactButton(String languageCode) {
         KeyboardButton contactButton = new KeyboardButton(sentenceService.getButtonText(ButtonKey.CONTACT, languageCode));
         contactButton.setRequestContact(true);

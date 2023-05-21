@@ -6,7 +6,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import uz.katkit.stadionmanagerbot.controller.admin.AdminMessageController;
 import uz.katkit.stadionmanagerbot.enums.ProfileRole;
 import uz.katkit.stadionmanagerbot.enums.Step;
-import uz.katkit.stadionmanagerbot.service.EditProfileService;
+import uz.katkit.stadionmanagerbot.service.ProfileEditService;
 import uz.katkit.stadionmanagerbot.service.ProfileService;
 
 @Component
@@ -15,13 +15,13 @@ public class MessageController {
     private final ProfileService profileService;
     private final AdminMessageController adminMessageController;
     private final TextController textController;
-    private final EditProfileController editProfileController;
-    private final EditProfileService editProfileService;
+    private final ProfileEditController profileEditController;
+    private final ProfileEditService profileEditService;
 
     public void handle(Message message) {
 
         if (profileService.addUser(message.getFrom())) {
-            editProfileService.requestName(message.getChatId(), Step.PROFILE_ENTER_NAME);
+            profileEditService.requestName(message.getChatId(), Step.PROFILE_ENTER_NAME);
             return;
         }
 
@@ -30,9 +30,7 @@ public class MessageController {
             return;
         }
 
-        if (message.hasText() && (message.getText().equals("/start") ||
-                message.getText().equals("/help") ||
-                message.getText().equals("/language"))) {
+        if (message.hasText() && (message.getText().equals("/start") || message.getText().equals("/help") || message.getText().equals("/language"))) {
 
             textController.replyToBotCommand(message);
             return;
@@ -42,7 +40,9 @@ public class MessageController {
         if (message.hasContact()) {
             Step step = profileService.getStep(message.getChatId());
             if (step.equals(Step.PROFILE_EDIT_PHONE)) {
-                editProfileController.changePhoneNumber(message);
+                profileEditController.changePhoneNumber(message);
+            } else if (step.equals(Step.PROFILE_ENTER_PHONE)) {
+                profileEditController.enterPhoneNumber(message);
             }
             return;
         }

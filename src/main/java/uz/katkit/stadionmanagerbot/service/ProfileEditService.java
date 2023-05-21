@@ -4,14 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Message;
 import uz.katkit.stadionmanagerbot.bot.SendingService;
 import uz.katkit.stadionmanagerbot.enums.SentenceKey;
 import uz.katkit.stadionmanagerbot.enums.Step;
 
 @Service
 @RequiredArgsConstructor
-public class EditProfileService {
+public class ProfileEditService {
 
     private final ProfileService profileService;
     private final ButtonService buttonService;
@@ -57,34 +56,53 @@ public class EditProfileService {
         sendingService.sendMessage(sendMessage);
     }
 
+    public void enterPhone(Long chatId) {
+        profileService.changeStep(chatId, Step.PROFILE_ENTER_PHONE);
 
-    public void changePhoneNumber(Long chatId, String phoneNumber) {
         String languageCode = profileService.getLanguageCode(chatId);
-        profileService.changeStep(chatId, Step.PROFILE_EDIT);
-        profileService.changePhoneNumber(chatId, phoneNumber);
         SendMessage sendMessage = new SendMessage();
-        sendMessage.setText(sentenceService.getSentence(SentenceKey.NUMBER_CHANGED, languageCode));
         sendMessage.setChatId(chatId);
-        sendMessage.setReplyMarkup(buttonService.getEditProfileMarkup(languageCode));
+        sendMessage.setText(sentenceService.getSentence(SentenceKey.REQUEST_CONTACT, languageCode));
+        sendMessage.setReplyMarkup(buttonService.getEnterContactButton(languageCode));
 
         sendingService.sendMessage(sendMessage);
+    }
+
+
+    public void changePhoneNumber(Long chatId, String phoneNumber, boolean isChange) {
+        String languageCode = profileService.getLanguageCode(chatId);
+        profileService.changePhoneNumber(chatId, phoneNumber);
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+
+        if (isChange) {
+            profileService.changeStep(chatId, Step.MAIN);
+            sendMessage.setText(sentenceService.getSentence(SentenceKey.HOME, languageCode));
+            sendMessage.setReplyMarkup(buttonService.getMenu(languageCode));
+        } else {
+            profileService.changeStep(chatId, Step.PROFILE_EDIT);
+            sendMessage.setText(sentenceService.getSentence(SentenceKey.NUMBER_CHANGED, languageCode));
+            sendMessage.setReplyMarkup(buttonService.getEditProfileMarkup(languageCode));
+        }
         sendInformation(chatId);
+        sendingService.sendMessage(sendMessage);
 
     }
+
 
     public void changeName(Long chatId, String text, Step step, boolean isChange) {
         profileService.changeStep(chatId, step);
         profileService.changeName(chatId, text);
 
-        String languageCode = profileService.getLanguageCode(chatId);
 
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatId);
-        sendMessage.setText(sentenceService.getSentence(SentenceKey.NAME_CHANGED, languageCode));
-        sendingService.sendMessage(sendMessage);
         if (isChange) {
-            requestPhone(chatId);
+            enterPhone(chatId);
         } else {
+            String languageCode = profileService.getLanguageCode(chatId);
+            SendMessage sendMessage = new SendMessage();
+            sendMessage.setChatId(chatId);
+            sendMessage.setText(sentenceService.getSentence(SentenceKey.NAME_CHANGED, languageCode));
+            sendingService.sendMessage(sendMessage);
             sendInformation(chatId);
         }
     }

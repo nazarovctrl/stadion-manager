@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-
 @Entity
 @Table(name = "profile")
 public class ProfileEntity {

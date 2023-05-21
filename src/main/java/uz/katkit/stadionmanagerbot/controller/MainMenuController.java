@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import uz.katkit.stadionmanagerbot.enums.ButtonKey;
-import uz.katkit.stadionmanagerbot.service.EditProfileService;
+import uz.katkit.stadionmanagerbot.service.ProfileEditService;
 import uz.katkit.stadionmanagerbot.service.SentenceService;
 
 @Component
@@ -12,7 +12,7 @@ import uz.katkit.stadionmanagerbot.service.SentenceService;
 public class MainMenuController {
 
     private final SentenceService sentenceService;
-    private final EditProfileService cabinetService;
+    private final ProfileEditService cabinetService;
 
 
     public void handle(String text, Message message) {

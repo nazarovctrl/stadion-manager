@@ -6,16 +6,16 @@ import org.telegram.telegrambots.meta.api.objects.Contact;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import uz.katkit.stadionmanagerbot.enums.ButtonKey;
 import uz.katkit.stadionmanagerbot.enums.Step;
-import uz.katkit.stadionmanagerbot.service.EditProfileService;
+import uz.katkit.stadionmanagerbot.service.ProfileEditService;
 import uz.katkit.stadionmanagerbot.service.ProfileService;
 import uz.katkit.stadionmanagerbot.service.SentenceService;
 
 @Component
 @RequiredArgsConstructor
-public class EditProfileController {
+public class ProfileEditController {
     private final SentenceService sentenceService;
     private final ProfileService profileService;
-    private final EditProfileService editProfileService;
+    private final ProfileEditService profileEditService;
 
 
     public void handle(Long chatId, String text) {
@@ -24,9 +24,9 @@ public class EditProfileController {
 
         if (buttonKey != null) {
             switch (buttonKey) {
-                case CHANGE_NAME -> editProfileService.requestName(chatId, Step.PROFILE_EDIT_NAME);
-                case CHANGE_PHONE -> editProfileService.requestPhone(chatId);
-                case BACK -> editProfileService.toEditCabinet(chatId);
+                case CHANGE_NAME -> profileEditService.requestName(chatId, Step.PROFILE_EDIT_NAME);
+                case CHANGE_PHONE -> profileEditService.requestPhone(chatId);
+                case BACK -> profileEditService.toEditCabinet(chatId);
             }
 
             return;
@@ -35,8 +35,8 @@ public class EditProfileController {
         Step step = profileService.getStep(chatId);
 
         switch (step) {
-            case PROFILE_EDIT_NAME -> editProfileService.changeName(chatId, text, Step.PROFILE_EDIT, false);
-            case PROFILE_EDIT_PHONE -> editProfileService.changePhoneNumber(chatId, text);
+            case PROFILE_EDIT_NAME -> profileEditService.changeName(chatId, text, Step.PROFILE_EDIT, false);
+            case PROFILE_EDIT_PHONE -> profileEditService.changePhoneNumber(chatId, text, false);
         }
 
     }
@@ -45,6 +45,12 @@ public class EditProfileController {
     public void changePhoneNumber(Message message) {
         Contact contact = message.getContact();
         String phoneNumber = contact.getPhoneNumber();
-        editProfileService.changePhoneNumber(message.getChatId(), phoneNumber);
+        profileEditService.changePhoneNumber(message.getChatId(), phoneNumber, false);
+    }
+
+    public void enterPhoneNumber(Message message) {
+        Contact contact = message.getContact();
+        String phoneNumber = contact.getPhoneNumber();
+        profileEditService.changePhoneNumber(message.getChatId(), phoneNumber, true);
     }
 }
