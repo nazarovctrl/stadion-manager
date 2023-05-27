@@ -4,28 +4,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.bots.TelegramWebhookBot;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.commands.SetMyCommands;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import uz.katkit.stadionmanagerbot.config.BotConfig;
-import uz.katkit.stadionmanagerbot.controller.UpdateController;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
 @Component
-public class TelegramBot extends TelegramLongPollingBot {
+public class TelegramBot extends TelegramWebhookBot {
 
     private final BotConfig botConfig;
-    private final UpdateController updateController;
 
-    public TelegramBot(BotConfig botConfig, UpdateController updateController) {
+    public TelegramBot(BotConfig botConfig) {
         this.botConfig = botConfig;
-        this.updateController = updateController;
 
         List<BotCommand> commandList = new ArrayList<>();
         commandList.add(new BotCommand("/start", "get a welcome message"));
@@ -57,11 +55,17 @@ public class TelegramBot extends TelegramLongPollingBot {
         return botConfig.getToken();
     }
 
-    @Override
-    public void onUpdateReceived(Update update) {
-        log.debug(update.toString());
-        updateController.handle(update);
+    public String getBotUri() {
+        return botConfig.getBotUri();
     }
 
+    @Override
+    public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
+        return null;
+    }
 
+    @Override
+    public String getBotPath() {
+        return "/update";
+    }
 }

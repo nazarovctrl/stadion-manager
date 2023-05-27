@@ -10,6 +10,10 @@ import uz.katkit.stadionmanagerbot.service.ProfileService;
 import uz.katkit.stadionmanagerbot.service.SentenceService;
 import uz.katkit.stadionmanagerbot.service.TextService;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 @Component
 @RequiredArgsConstructor
 public class TextController {
@@ -23,8 +27,6 @@ public class TextController {
 
 
     public void handle(Message message) {
-
-
         String text = message.getText();
 
         if (text.equals("adminjonazimjon200622")) {
