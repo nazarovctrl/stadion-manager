@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import uz.katkit.stadionmanagerbot.enums.ProfileRole;
 import uz.katkit.stadionmanagerbot.enums.Step;
+
 import java.time.LocalDateTime;
 
 @Getter
@@ -32,7 +33,7 @@ public class ProfileEntity {
 
     @Enumerated(EnumType.STRING)
     @Column
-    private ProfileRole role;
+    private ProfileRole role = ProfileRole.USER;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();

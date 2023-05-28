@@ -119,11 +119,8 @@ public class ProfileService {
         String information = "*%s:* _" + profile.getName() + "_ \n" +
                 "*%s:* _" + profile.getPhone() + "_";
 
-        return String.format(information,
-                sentenceService.getSentence(SentenceKey.NAME, languageCode),
-                sentenceService.getSentence(SentenceKey.PHONE_NUMBER, languageCode),
-                sentenceService.getSentence(SentenceKey.INFORMATION, languageCode)
-        );
+        return String.format(information,sentenceService.getSentence(SentenceKey.NAME, languageCode),
+                sentenceService.getSentence(SentenceKey.PHONE_NUMBER, languageCode));
     }
 
     public String getInformation(ProfileEntity profile) {

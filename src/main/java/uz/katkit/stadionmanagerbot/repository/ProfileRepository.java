@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import uz.katkit.stadionmanagerbot.entity.ProfileEntity;
 import uz.katkit.stadionmanagerbot.enums.ProfileRole;
 import uz.katkit.stadionmanagerbot.enums.Step;
+
 import java.util.List;
 
 @Repository
@@ -66,7 +67,7 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer
             "WHERE userId=?1")
     void changeRegisteredField(Long chatId, boolean isRegistered);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Transactional
     @Query("UPDATE ProfileEntity " +
             "SET phone=?2 " +
