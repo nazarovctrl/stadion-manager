@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import uz.katkit.stadionmanagerbot.dto.SentenceDTO;
 import uz.katkit.stadionmanagerbot.enums.ButtonKey;
 import uz.katkit.stadionmanagerbot.enums.SentenceKey;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -255,7 +256,19 @@ public class SentenceService {
         );
         sentenceMap.put(SentenceKey.POST_REQUEST, postRequest);
 
+        SentenceDTO invalidPhone = new SentenceDTO(
+                "Telefon raqam yaroqsiz\nNamuna 998991234567",
+                "Номер телефона недействителен\nОбразец 998991234567",
+                "The phone number is invalid\nExample 998991234567"
+        );
+        sentenceMap.put(SentenceKey.INVALID_PHONE, invalidPhone);
 
+        SentenceDTO order = new SentenceDTO(
+                "Hududni tanlang",
+                "Выберите область",
+                "Choose a region"
+        );
+        sentenceMap.put(SentenceKey.ORDER, order);
     }
 
 

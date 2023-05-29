@@ -1,28 +1,28 @@
 package uz.katkit.stadionmanagerbot.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import uz.katkit.stadionmanagerbot.entity.RegionEntity;
 import uz.katkit.stadionmanagerbot.enums.ButtonKey;
 import uz.katkit.stadionmanagerbot.util.ButtonUtil;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 @Service
+@RequiredArgsConstructor
 public class ButtonService {
 
-    private final ProfileService profileService;
+    private final RegionService regionService;
     private final SentenceService sentenceService;
-
-    public ButtonService(@Lazy ProfileService profileService, SentenceService sentenceService) {
-        this.profileService = profileService;
-        this.sentenceService = sentenceService;
-    }
-
 
     public ReplyKeyboardMarkup getMenu(String languageCode) {
         List<KeyboardRow> rowList = ButtonUtil.rowList(
@@ -122,6 +122,7 @@ public class ButtonService {
         markup.setResizeKeyboard(true);
         return markup;
     }
+
     public ReplyKeyboardMarkup getRequestContactButton(String languageCode) {
         KeyboardButton contactButton = new KeyboardButton(sentenceService.getButtonText(ButtonKey.CONTACT, languageCode));
         contactButton.setRequestContact(true);
@@ -175,4 +176,29 @@ public class ButtonService {
         return ButtonUtil.row(ButtonUtil.button(sentenceService.getButtonText(ButtonKey.HOME, languageCode)));
     }
 
+    public ReplyKeyboard getOrderMarkup() {
+        Stack<RegionEntity> regionList = regionService.getList();
+
+        ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
+        markup.setResizeKeyboard(true);
+        List<KeyboardRow> keyboard = new ArrayList<>();
+
+        markup.setKeyboard(keyboard);
+
+        for (int i = 0; i+1 < regionList.size(); i += 2) {
+            KeyboardRow row = new KeyboardRow();
+            row.add(regionList.pop().getName());
+            row.add(regionList.pop().getName());
+            keyboard.add(row);
+        }
+
+        if (!regionList.isEmpty()) {
+            KeyboardRow row = new KeyboardRow();
+            row.add(regionList.pop().getName());
+            keyboard.add(row);
+        }
+
+        return markup;
+
+    }
 }

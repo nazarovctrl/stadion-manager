@@ -68,12 +68,23 @@ public class ProfileEditService {
         sendingService.sendMessage(sendMessage);
     }
 
+    public boolean isValidPhoneNumber(String phone) {
+        return phone.matches("9[98][0-9]{10}");
+    }
 
     public void changePhoneNumber(Long chatId, String phoneNumber, boolean isChange) {
         String languageCode = profileService.getLanguageCode(chatId);
-        profileService.changePhoneNumber(chatId, phoneNumber);
+
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
+
+        if (!isValidPhoneNumber(phoneNumber)) {
+            sendMessage.setText(sentenceService.getSentence(SentenceKey.INVALID_PHONE, languageCode));
+            sendingService.sendMessage(sendMessage);
+            return;
+        }
+
+        profileService.changePhoneNumber(chatId, phoneNumber);
 
         if (isChange) {
             profileService.changeStep(chatId, Step.MAIN);
@@ -84,6 +95,7 @@ public class ProfileEditService {
             sendMessage.setText(sentenceService.getSentence(SentenceKey.NUMBER_CHANGED, languageCode));
             sendMessage.setReplyMarkup(buttonService.getEditProfileMarkup(languageCode));
         }
+
         sendInformation(chatId);
         sendingService.sendMessage(sendMessage);
 
