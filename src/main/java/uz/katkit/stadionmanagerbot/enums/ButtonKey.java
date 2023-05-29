@@ -13,6 +13,6 @@ public enum ButtonKey {
     CHANGE_NAME, CHANGE_PHONE,
 
     //Admin
-    STATISTICS, POST_CREATE,
+    STATISTICS, POST_CREATE, REGION_ADD,
 
 }

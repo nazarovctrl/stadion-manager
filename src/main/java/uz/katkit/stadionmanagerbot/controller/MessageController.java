@@ -20,6 +20,11 @@ public class MessageController {
 
     public void handle(Message message) {
 
+        if (ProfileRole.ADMIN.equals(profileService.getByUserId(message.getChatId()).getRole())) {
+            adminMessageController.handle(message);
+            return;
+        }
+
         if (profileService.addUser(message.getFrom())) {
             profileEditService.requestName(message.getChatId(), Step.PROFILE_ENTER_NAME);
             return;

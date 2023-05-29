@@ -243,9 +243,9 @@ public class SentenceService {
 
 
         SentenceDTO statistic = new SentenceDTO(
-                "*Jami Foydalanuvchilar soni:* _%s_ \n*Jami loyihar:* _%s_ \n*Hozirda mavjud loyihar:* _%s_ ",
-                "*Общее количество пользователей:* _%s_ \n*Всего проекта:* _%s_ \n*Сейчас доступен проект:* _%s_",
-                "*Total Number of Users:* _%s_ \n*Total project:* _%s_ \n*Currently available project:* _%s_"
+                "*Jami Foydalanuvchilar soni:* _%s_",
+                "*Общее количество пользователей:* _%s_",
+                "*Total Number of Users:* _%s_"
         );
         sentenceMap.put(SentenceKey.STATISTIC, statistic);
 
@@ -346,6 +346,13 @@ public class SentenceService {
                 "Create a post"
         );
         buttonMap.put(ButtonKey.POST_CREATE, postCreate);
+
+        SentenceDTO regionAdd = new SentenceDTO(
+                "Hudud qo'shish",
+                "Добавить регион ",
+                "Add region"
+        );
+        buttonMap.put(ButtonKey.REGION_ADD, regionAdd);
 
 
     }

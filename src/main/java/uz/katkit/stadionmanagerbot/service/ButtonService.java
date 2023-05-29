@@ -37,9 +37,8 @@ public class ButtonService {
         List<KeyboardRow> rowList = ButtonUtil.rowList(
                 ButtonUtil.row(
                         ButtonUtil.button(sentenceService.getButtonText(ButtonKey.STATISTICS, languageCode)),
-                        ButtonUtil.button(sentenceService.getButtonText(ButtonKey.POST_CREATE, languageCode))
-
-                ));
+                        ButtonUtil.button(sentenceService.getButtonText(ButtonKey.POST_CREATE, languageCode)))
+                , ButtonUtil.row(ButtonUtil.button(sentenceService.getButtonText(ButtonKey.REGION_ADD, languageCode))));
 
         return ButtonUtil.markup(rowList);
 
@@ -185,7 +184,7 @@ public class ButtonService {
 
         markup.setKeyboard(keyboard);
 
-        for (int i = 0; i+1 < regionList.size(); i += 2) {
+        for (int i = 0; i + 1 < regionList.size(); i += 2) {
             KeyboardRow row = new KeyboardRow();
             row.add(regionList.pop().getName());
             row.add(regionList.pop().getName());

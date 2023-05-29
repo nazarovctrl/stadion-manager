@@ -21,5 +21,5 @@ public class RegionEntity {
     private LocalDateTime createdDate;
 
     @Column
-    private boolean visible;
+    private boolean visible=true;
 }
