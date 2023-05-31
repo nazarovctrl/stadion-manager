@@ -269,6 +269,20 @@ public class SentenceService {
                 "Choose a region"
         );
         sentenceMap.put(SentenceKey.ORDER, order);
+
+        SentenceDTO regionNameRequest = new SentenceDTO(
+                "Hududni nomini kiriting",
+                "Введите название",
+                "Enter the name of the region"
+        );
+        sentenceMap.put(SentenceKey.REGION_NAME_REQUEST, regionNameRequest);
+
+        SentenceDTO regionAdded = new SentenceDTO(
+                "Hudud tizimga qo'shildi",
+                "Район добавлен в систему",
+                "The area has been added to the system"
+        );
+        sentenceMap.put(SentenceKey.REGION_ADDED, regionAdded);
     }
 
 

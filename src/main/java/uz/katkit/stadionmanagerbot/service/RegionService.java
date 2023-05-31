@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import uz.katkit.stadionmanagerbot.entity.RegionEntity;
 import uz.katkit.stadionmanagerbot.repository.RegionRepository;
-
-import java.util.List;
 import java.util.Stack;
 
 @Service
@@ -15,5 +13,11 @@ public class RegionService {
 
     public Stack<RegionEntity> getList() {
         return regionRepository.findByVisible(true);
+    }
+
+    public void addRegion(String regionName) {
+        RegionEntity entity = new RegionEntity();
+        entity.setName(regionName);
+        regionRepository.save(entity);
     }
 }

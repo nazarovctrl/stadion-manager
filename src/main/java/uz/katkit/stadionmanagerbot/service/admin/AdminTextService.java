@@ -10,6 +10,7 @@ import uz.katkit.stadionmanagerbot.enums.Step;
 import uz.katkit.stadionmanagerbot.repository.ProfileRepository;
 import uz.katkit.stadionmanagerbot.service.ButtonService;
 import uz.katkit.stadionmanagerbot.service.ProfileService;
+import uz.katkit.stadionmanagerbot.service.RegionService;
 import uz.katkit.stadionmanagerbot.service.SentenceService;
 
 @Service
@@ -20,6 +21,7 @@ public class AdminTextService {
     private final ButtonService buttonService;
     private final SendingService sendingService;
     private final ProfileRepository profileRepository;
+    private final RegionService regionService;
 
 
     public void changeLanguage(Long chatId) {
@@ -88,5 +90,30 @@ public class AdminTextService {
 
         profileService.changeStep(chatId, Step.POST_SEND);
         sendingService.sendMessage(sendMessage);
+    }
+
+    public void requestRegionName(Long chatId) {
+        String languageCode = profileService.getLanguageCode(chatId);
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(sentenceService.getSentence(SentenceKey.REGION_NAME_REQUEST, languageCode));
+        sendMessage.setReplyMarkup(buttonService.getHomeMarkup(languageCode));
+
+        profileService.changeStep(chatId, Step.REGION_NAME);
+        sendingService.sendMessage(sendMessage);
+    }
+
+    public void addRegion(Long chatId, String regionName) {
+
+        regionService.addRegion(regionName);
+
+        String languageCode = profileService.getLanguageCode(chatId);
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(sentenceService.getSentence(SentenceKey.REGION_ADDED, languageCode));
+        sendMessage.setReplyMarkup(buttonService.getHomeMarkup(languageCode));
+
+        sendingService.sendMessage(sendMessage);
+
     }
 }

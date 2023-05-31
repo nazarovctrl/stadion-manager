@@ -18,8 +18,8 @@ public class RegionEntity {
     private String name;
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     @Column
-    private boolean visible=true;
+    private boolean visible = true;
 }
