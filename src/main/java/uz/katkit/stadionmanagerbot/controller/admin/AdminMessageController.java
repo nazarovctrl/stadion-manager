@@ -21,7 +21,6 @@ public class AdminMessageController {
             return;
         }
 
-
         Step step = profileService.getStep(message.getChatId());
         if (step != null && step.equals(Step.POST_SEND)) {
             postController.handle(message);

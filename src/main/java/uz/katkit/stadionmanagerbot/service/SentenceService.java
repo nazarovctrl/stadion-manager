@@ -361,14 +361,19 @@ public class SentenceService {
         );
         buttonMap.put(ButtonKey.POST_CREATE, postCreate);
 
+        SentenceDTO regions = new SentenceDTO(
+                "Hududlar",
+                "Регионы",
+                "Regions"
+        );
+        buttonMap.put(ButtonKey.REGIONS, regions);
+
         SentenceDTO regionAdd = new SentenceDTO(
                 "Hudud qo'shish",
                 "Добавить регион ",
                 "Add region"
         );
         buttonMap.put(ButtonKey.REGION_ADD, regionAdd);
-
-
     }
 
 }

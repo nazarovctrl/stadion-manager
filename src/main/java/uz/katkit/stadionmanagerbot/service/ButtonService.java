@@ -37,8 +37,9 @@ public class ButtonService {
         List<KeyboardRow> rowList = ButtonUtil.rowList(
                 ButtonUtil.row(
                         ButtonUtil.button(sentenceService.getButtonText(ButtonKey.STATISTICS, languageCode)),
-                        ButtonUtil.button(sentenceService.getButtonText(ButtonKey.POST_CREATE, languageCode)))
-                , ButtonUtil.row(ButtonUtil.button(sentenceService.getButtonText(ButtonKey.REGION_ADD, languageCode))));
+                        ButtonUtil.button(sentenceService.getButtonText(ButtonKey.POST_CREATE, languageCode))),
+                ButtonUtil.row(ButtonUtil.button(sentenceService.getButtonText(ButtonKey.REGIONS, languageCode)),
+                        ButtonUtil.button(sentenceService.getButtonText(ButtonKey.REGION_ADD, languageCode))));
 
         return ButtonUtil.markup(rowList);
 
@@ -176,7 +177,7 @@ public class ButtonService {
     }
 
     public ReplyKeyboard getOrderMarkup() {
-        Stack<RegionEntity> regionList = regionService.getList();
+        Stack<RegionEntity> regionList = regionService.getList(true);
 
         ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup();
         markup.setResizeKeyboard(true);

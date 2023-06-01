@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import uz.katkit.stadionmanagerbot.bot.SendingService;
+import uz.katkit.stadionmanagerbot.entity.RegionEntity;
 import uz.katkit.stadionmanagerbot.enums.SentenceKey;
 import uz.katkit.stadionmanagerbot.enums.Step;
 import uz.katkit.stadionmanagerbot.repository.ProfileRepository;
@@ -12,6 +13,9 @@ import uz.katkit.stadionmanagerbot.service.ButtonService;
 import uz.katkit.stadionmanagerbot.service.ProfileService;
 import uz.katkit.stadionmanagerbot.service.RegionService;
 import uz.katkit.stadionmanagerbot.service.SentenceService;
+
+import java.util.List;
+import java.util.Stack;
 
 @Service
 @RequiredArgsConstructor
@@ -115,5 +119,19 @@ public class AdminTextService {
 
         sendingService.sendMessage(sendMessage);
 
+    }
+
+    public void sendRegions(Long chatId) {
+        List<RegionEntity> regionServiceList = regionService.getList();
+
+        StringBuilder text = new StringBuilder();
+
+        regionServiceList.forEach(region -> text.append(region.getId()).append(" ").append(region.getName()).append("\n"));
+
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setChatId(chatId);
+        sendMessage.setText(text.toString());
+
+        sendingService.sendMessage(sendMessage);
     }
 }

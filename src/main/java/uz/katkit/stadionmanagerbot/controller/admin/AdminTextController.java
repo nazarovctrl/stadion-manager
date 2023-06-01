@@ -29,6 +29,7 @@ public class AdminTextController {
             switch (buttonKey) {
                 case STATISTICS -> adminTextService.sendStatistic(chatId);
                 case POST_CREATE -> adminTextService.requestPost(chatId);
+                case REGIONS -> adminTextService.sendRegions(chatId);
                 case REGION_ADD -> adminTextService.requestRegionName(chatId);
             }
             return;
